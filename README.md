@@ -1,9 +1,9 @@
-# Data Management for Analytics (GWU ISTM 6212) Notebook stack
+# Data Management for Analytics notebook stack
 
 This docker stack provides everything in Jupyter's
 [datascience-notebook](https://github.com/jupyter/docker-stacks/tree/master/datascience-notebook)
 with some additional tools students will use in a Data Management
-for Analytics course.
+for Analytics course (GWU ISTM 6212).
 
 
 ## Instructions
