@@ -1,3 +1,6 @@
+[![](https://images.microbadger.com/badges/version/dchud/datamanagement-notebook.svg)](http://microbadger.com/images/dchud/datamanagement-notebook "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/dchud/datamanagement-notebook.svg)](http://microbadger.com/images/dchud/datamanagement-notebook "Get your own image badge on microbadger.com")
+
 # Data Management for Analytics notebook stack
 
 This docker stack provides everything in Jupyter's
