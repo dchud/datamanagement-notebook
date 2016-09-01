@@ -9,7 +9,7 @@ for Analytics course (GWU ISTM 6212).
 ## Instructions
 
 Please visit [docker-stacks](https://github.com/jupyter/docker-stacks) for
-details instructions.
+detailed instructions.
 
 
 ## Additions to datascience-notebook
