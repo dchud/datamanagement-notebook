@@ -22,5 +22,7 @@ details.
 
  * [csvkit](https://csvkit.readthedocs.io/)
  * [ipython-sql](https://github.com/catherinedevlin/ipython-sql)
+ * [GNU less](https://www.gnu.org/software/less/)
+ * [GNU nano](https://www.nano-editor.org/)
  * [nbgrader](https://nbgrader.readthedocs.io/en/stable/)
  * [GNU Parallel](https://www.gnu.org/software/parallel/)
