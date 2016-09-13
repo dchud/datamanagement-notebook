@@ -9,6 +9,8 @@ USER root
 # GNU Parallel
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    less
+    nano \
     parallel \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
