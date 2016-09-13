@@ -9,7 +9,7 @@ USER root
 # GNU Parallel
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    less
+    less \
     nano \
     parallel \
     && apt-get clean \
