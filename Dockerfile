@@ -33,12 +33,11 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 RUN echo "local all all     trust" \
     >> /etc/postgresql/9.5/main/pg_hba.conf
-EXPOSE 5432/tcp
 RUN update-rc.d postgresql defaults
 RUN service postgresql restart
 
 USER postgres
-RUN createuser --createdb dbuser
+RUN createuser --host localhost --createdb dbuser
 
 
 USER $NB_USER
