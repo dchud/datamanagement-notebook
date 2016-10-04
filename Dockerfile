@@ -28,11 +28,14 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
     | sudo apt-key add -
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    postgresql-9.5 postgresql-client-9.5 libpq-dev
+    postgresql-9.5 postgresql-client-9.5 libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 RUN echo "local all all     trust" \
     >> /etc/postgresql/9.5/main/pg_hba.conf
+EXPOSE 5432/tcp
 RUN update-rc.d postgresql defaults
-RUN service postgresql start
+RUN service postgresql restart
 
 USER postgres
 RUN createuser --createdb dbuser
