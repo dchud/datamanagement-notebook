@@ -37,7 +37,7 @@ RUN update-rc.d postgresql defaults
 RUN service postgresql restart
 
 USER postgres
-RUN createuser --host localhost --createdb dbuser
+RUN createuser --createdb dbuser
 
 
 USER $NB_USER
