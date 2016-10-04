@@ -19,7 +19,24 @@ RUN conda install --quiet --yes -c jhamrick nbgrader \
 RUN nbgrader extension install
 RUN nbgrader extension activate
 
+# Postgresql 9.5 server, client, library, and dbuser
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" \
+    > /etc/apt/sources.list.d/postgresql.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+    | sudo apt-key add -
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    postgresql-9.5 postgresql-client-9.5 libpq-dev
+
+USER postgres
+RUN createuser --createdb dbuser
+
+
 USER $NB_USER
+
+# Postgresql python library
+RUN conda install --quiet --yes psycopg2 \
+    && conda clean -tipsy
 
 # CSVKit
 RUN conda install --quiet --yes \

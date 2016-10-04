@@ -24,3 +24,5 @@ details.
  * [ipython-sql](https://github.com/catherinedevlin/ipython-sql)
  * [nbgrader](https://nbgrader.readthedocs.io/en/stable/)
  * [GNU Parallel](https://www.gnu.org/software/parallel/)
+ * [PostgreSQL 9.5](https://www.postgresql.org/)
+ * [Psycopg2](http://initd.org/psycopg/)
