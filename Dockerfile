@@ -22,6 +22,7 @@ RUN nbgrader extension install
 RUN nbgrader extension activate
 
 # Postgresql 9.5 server, client, library, and dbuser
+RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" \
     > /etc/apt/sources.list.d/postgresql.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
@@ -32,7 +33,6 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 RUN echo "local all all trust" >> /etc/postgresql/9.5/main/pg_hba.conf
-RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.5/main/postgresql.conf
 RUN update-rc.d postgresql defaults
 RUN service postgresql restart
 
