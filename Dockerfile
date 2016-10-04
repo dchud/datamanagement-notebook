@@ -32,7 +32,7 @@ RUN apt-get update && \
     postgresql-9.5 postgresql-client-9.5 libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-RUN echo "local all all trust" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "local all all trust" > /etc/postgresql/9.5/main/pg_hba.conf
 RUN update-rc.d postgresql defaults
 RUN service postgresql restart
 RUN chown -R postgres:postgres /var/run/postgresql
