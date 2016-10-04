@@ -29,6 +29,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     postgresql-9.5 postgresql-client-9.5 libpq-dev
+RUN update-rc.d postgresql defaults
+RUN service postgresql start
 
 USER postgres
 RUN createuser --createdb dbuser
