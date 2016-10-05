@@ -38,8 +38,6 @@ RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.5/main/postgresql.conf
 RUN update-rc.d postgresql defaults
 RUN service postgresql restart
 RUN chown -R postgres:postgres /var/run/postgresql
-
-USER postgres
 RUN createuser --createdb dbuser
 
 
