@@ -37,7 +37,9 @@ RUN echo "host all all 127.0.0.1/32 trust" >> /etc/postgresql/9.5/main/pg_hba.co
 RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.5/main/postgresql.conf
 RUN update-rc.d postgresql defaults
 RUN service postgresql restart
-RUN chown -R postgres:postgres /var/run/postgresql
+RUN chmod go+w /var/run/postgresql/.s.PGSQL.5432
+
+USER postgres
 RUN createuser --createdb dbuser
 
 
