@@ -21,20 +21,25 @@ RUN conda install --quiet --yes -c jhamrick nbgrader \
 RUN nbgrader extension install
 RUN nbgrader extension activate
 
-# Postgresql 9.5 client and library
+# Postgresql 9.5 server, client, and library
 RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" \
     > /etc/apt/sources.list.d/postgresql.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
     | sudo apt-key add -
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    postgresql-client-9.5 libpq-dev \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    postgresql-9.5 postgresql-client-9.5 libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+RUN echo "local all all trust" > /etc/postgresql/9.5/main/pg_hba.con
+RUN chown -R postgres:postgres /var/run/postgresql
+RUN echo "jovyan:redspot" | chpasswd
 
-# Add a password for jovyan
-RUN echo "jovyan:zeus" | chpasswd
+USER postgres
+RUN service postgresql restart \
+    && createuser --superuser dbuser
+
 
 USER $NB_USER
 
