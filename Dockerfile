@@ -21,7 +21,7 @@ RUN conda install --quiet --yes -c jhamrick nbgrader \
 RUN nbgrader extension install
 RUN nbgrader extension activate
 
-# Postgresql 9.5 server, client, library, and dbuser
+# Postgresql 9.5 client and library
 RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" \
     > /etc/apt/sources.list.d/postgresql.list
@@ -32,6 +32,9 @@ RUN apt-get update && \
     postgresql-client-9.5 libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Add a password for jovyan
+RUN echo "jovyan:zeus" | chpasswd
 
 USER $NB_USER
 
