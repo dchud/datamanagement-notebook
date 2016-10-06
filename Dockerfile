@@ -29,10 +29,10 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
     | sudo apt-key add -
 RUN locale-gen --no-purge en_US.UTF-8 && \
     update-locale LANG=en_US.UTF-8 && \
-    echo locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8 |
-    debconf-set-selections && \
-    echo locales locales/default_environment_locale select en_US.UTF-8 |
-    debconf-set-selections && \
+    echo locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8 \
+        | debconf-set-selections && \
+    echo locales locales/default_environment_locale select en_US.UTF-8 \
+        | debconf-set-selections && \
     dpkg-reconfigure locales
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
