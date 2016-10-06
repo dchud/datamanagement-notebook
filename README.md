@@ -41,3 +41,6 @@ better than nothing.
 To set the password in a local build:
 
     % docker build --build-arg passwd=MYPASSWORD -t dchud/datamanagement-notebook .
+
+If you don't specify `passwd` as a `--build-arg`, the password will
+be empty.
