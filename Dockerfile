@@ -46,6 +46,11 @@ USER $NB_USER
 # run sudo a first time so students don't see the sudo "usual lecture"
 RUN echo 'redspot' | sudo -S ls
 
+# "secure" the notebook
+RUN jupyter notebook -y --generate-config
+ARG passwd
+RUN python -c "from IPython.lib import passwd; p=passwd('$passwd'); open('/home/jovyan/.jupyter/jupyter_notebook_config.py', 'a').write('\nc.NotebookApp.password = u\'%s\'\n' % p)"
+
 # Postgresql python library
 RUN conda install --quiet --yes psycopg2 \
     && conda clean -tipsy
