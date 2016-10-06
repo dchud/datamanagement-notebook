@@ -42,8 +42,9 @@ USER postgres
 RUN service postgresql restart \
     && createuser --superuser dbuser
 
-
 USER $NB_USER
+# run sudo a first time so students don't see the sudo "usual lecture"
+RUN echo 'redspot' | sudo -S ls
 
 # Postgresql python library
 RUN conda install --quiet --yes psycopg2 \
