@@ -32,8 +32,10 @@ RUN apt-get update \
     postgresql-9.5 postgresql-client-9.5 libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-RUN echo "local all all trust" > /etc/postgresql/9.5/main/pg_hba.con
+RUN echo "local all all trust" > /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "host all all ::1/128 trust" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN chown -R postgres:postgres /var/run/postgresql
+RUN echo "jovyan ALL=(ALL)   ALL" >> /etc/sudoers
 RUN echo "jovyan:redspot" | chpasswd
 
 USER postgres
