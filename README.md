@@ -26,5 +26,5 @@ details.
  * [GNU nano](https://www.nano-editor.org/)
  * [nbgrader](https://nbgrader.readthedocs.io/en/stable/)
  * [GNU Parallel](https://www.gnu.org/software/parallel/)
- * [PostgreSQL 9.5](https://www.postgresql.org/)
+ * [PostgreSQL 9.5](https://www.postgresql.org/) client and library
  * [Psycopg2](http://initd.org/psycopg/)
