@@ -28,3 +28,16 @@ details.
  * [GNU Parallel](https://www.gnu.org/software/parallel/)
  * [PostgreSQL 9.5](https://www.postgresql.org/) client and library
  * [Psycopg2](http://initd.org/psycopg/)
+
+Note that Docker won't allow a process like the postgresql daemon
+to continue running, so the user account `jovyan` is given sudo
+rights.  Within a notebook, or in a shell, `jovyan` can restart
+postgresql with sudo.  Because of this, a build argument for the
+document image allows for a password to be set at build time, on
+the commandline, for the case where this environment might be
+deployed on a public server.  It's not real security, but it's
+better than nothing.
+
+To set the password in a local build:
+
+    % docker build --build-arg passwd=MYPASSWORD -t dchud/datamanagement-notebook .
