@@ -16,29 +16,11 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # nbgrader support
-RUN conda install --quiet --yes -c jhamrick nbgrader \
+RUN conda install jupyter
+RUN conda install --quiet --yes -c conda-forge nbgrader \
     && conda clean -tipsy
-RUN nbgrader extension install
-RUN nbgrader extension activate
 
-# Spark 2.0.2 install and config from pyspark-notebook
-ENV APACHE_SPARK_VERSION 2.0.2
-ENV APACHE_HADOOP_VERSION 2.7
-RUN apt-get -y update && \
-    apt-get install -y --no-install-recommends openjdk-7-jre-headless && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-RUN cd /tmp && \
-    wget -q http://d3kbcqa49mib13.cloudfront.net/spark-${APACHE_SPARK_VERSION}-bin-hadoop${APACHE_HADOOP_VERSION}.tgz && \
-    echo "e6349dd38ded84831e3ff7d391ae7f2525c359fb452b0fc32ee2ab637673552a *spark-${APACHE_SPARK_VERSION}-bin-hadoop${APACHE_HADOOP_VERSION}.tgz" | sha256sum -c - && \
-    tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop${APACHE_HADOOP_VERSION}.tgz -C /usr/local && \
-    rm spark-${APACHE_SPARK_VERSION}-bin-hadoop${APACHE_HADOOP_VERSION}.tgz
-RUN cd /usr/local && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop${APACHE_HADOOP_VERSION} spark
-ENV SPARK_HOME /usr/local/spark
-ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.3-src.zip
-ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
-
-# Postgresql 9.5 server, client, and library
+# Postgresql 9.6 server, client, and library
 RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" \
     > /etc/apt/sources.list.d/postgresql.list
@@ -46,11 +28,11 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
     | sudo apt-key add -
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    postgresql-9.5 postgresql-client-9.5 libpq-dev \
+    postgresql-9.6 postgresql-client-9.6 libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-RUN echo "local all all trust" > /etc/postgresql/9.5/main/pg_hba.conf
-RUN echo "host all all ::1/128 trust" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "local all all trust" > /etc/postgresql/9.6/main/pg_hba.conf
+RUN echo "host all all ::1/128 trust" >> /etc/postgresql/9.6/main/pg_hba.conf
 RUN chown -R postgres:postgres /var/run/postgresql
 RUN echo "jovyan ALL=(ALL)   ALL" >> /etc/sudoers
 RUN echo "jovyan:redspot" | chpasswd
@@ -75,7 +57,7 @@ RUN conda install --quiet --yes psycopg2 \
 
 # CSVKit
 RUN conda install --quiet --yes \
-    'csvkit=0.9*' \
+    'csvkit=1.*' \
     && conda clean -tipsy
 
 # SQL support for ipython
