@@ -26,9 +26,8 @@ details.
  * [GNU nano](https://www.nano-editor.org/)
  * [nbgrader](https://nbgrader.readthedocs.io/en/stable/)
  * [GNU Parallel](https://www.gnu.org/software/parallel/)
- * [PostgreSQL 9.5](https://www.postgresql.org/) client and library
+ * [PostgreSQL 9.6](https://www.postgresql.org/) client and library
  * [Psycopg2](http://initd.org/psycopg/)
- * [Apache Spark](https://spark.apache.org/)
 
 Note that Docker won't allow a process like the postgresql daemon
 to continue running, so the user account `jovyan` is given sudo
